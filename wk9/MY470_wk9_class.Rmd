@@ -1,6 +1,5 @@
 ---
 title: "MY470 - Class Week 9 - More R Programming"
-author: "Pablo Barbera"
 ---
 
 ### Working with data frames
@@ -11,19 +10,32 @@ Using the `mtcars` dataset, you need to transform the `am` variable into a facto
 
 ```{r}
 data(mtcars) # this line of code will load the data into your workspace
-
-# add your code here
+mtcars$am_fater <- as.factor(mtcars$am)
+levels(mtcars$am_fater) <- c("automatic", "manual" )
 ```
 
 #### Computing aggregated statistics
 
 Create a table with the median value of `mpg` for each value of `am_factor` using the `aggregate` function. Read the help page for `aggregate` to find information on how to achieve this.
 
+
 ```{r}
-# add your code here
+
+library(tidyverse)
+attach(mtcars)
+
+aggregate(mpg~am_fater , FUN = median)
+
+aggregate(mtcars[,"mpg"], by = list(Trans = mtcars$am_fater), FUN = "median")
+
+Y~X : Y is divided into group based on X value.
+
+
 ```
 
 Now replicate the code above, but this time with the average instead of the median.
+
+
 
 ```{r}
 # add your code here
@@ -34,7 +46,33 @@ Now replicate the code above, but this time with the average instead of the medi
 Write an R function that checks if a string is a palindrome. As you may recall from earlier in the term, a palindrome is a word or phrase that reads the same backward as forward. Note that you may run into some of the limitations of R when working with strings. 
 
 ```{r}
-# add your code here
+
+library(stringr)
+palindrome <- function(string){
+        str_ls <- unlist(str_split(unlist(str_split(string,''))))
+        reversed_ls <- rev(str_ls)
+        reversed_ls <- str_ls[nchar(str_ls),1]
+
+        reversed_ls == str_ls # will return multiple logic value
+        all(reversed_ls == str_ls) # return one logic value
+
+        if (str_ls == reversed_ls){
+        	cat("This is a pallindrome")
+        	}
+        else{
+            cat("This is not a pallindrome")
+            }
+        }
+
+
+
+
+
+string <- "abcba"
+
+str_
+
+
 ```
 
 
@@ -43,7 +81,7 @@ Write an R function that checks if a string is a palindrome. As you may recall f
 Loops in R have a similar structure as in python. For example:
 
 ```{r}
-for (i in 1:10){
+for (i in 1:10) {
 	print(i)
 }
 ```
@@ -54,9 +92,15 @@ Compute and display the Fibonacci sequence of length 20 using your function.
 
 ```{r}
 n <- 20
+Fibonacci <- function(n){
+        a = 0
+        b = 1
+        for (i in 1:n){
+            a = b
+            b = a+b
+            print(a)
+            }
+}
+Fibonacci(20)
 # add your code here
 ```
-
-
-
-

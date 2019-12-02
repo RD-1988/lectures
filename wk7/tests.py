@@ -55,5 +55,6 @@ class TestRunningSum(unittest.TestCase):
         output_expected = [4, 4, 6, 1]
         self.assertEqual(output_expected, inputted, "Not working with mixed values.")
 
+
 if __name__ == '__main__':
     unittest.main()
